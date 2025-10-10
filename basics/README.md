@@ -1,1 +1,1 @@
-Script pwd
+Script
