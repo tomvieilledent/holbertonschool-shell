@@ -1,2 +1,2 @@
 #!/bin/bash
-revcat /etc/passwd
+cat /etc/passwd | sort
