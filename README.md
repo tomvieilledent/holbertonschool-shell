@@ -1,5 +1,6 @@
 # holbertonschool-shell
 
 basics
+init_files_variables_and_expansions
 io_redirections_and_filters
 permissions
