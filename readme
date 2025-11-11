@@ -1,6 +1,77 @@
-#!/bin/bash
-rm README.md
-echo -n "# " >> README.md
-pwd | rev | cut -d / -f 1 | rev >> README.md
-echo "" >> README.md
-ls -l |  grep -v README.md | grep -v readme | grep -v total |rev |cut -d " " -f 1| rev | sort -n >> README.md
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Fonction pour obtenir la date selon OS
+if [[ "$(uname)" == "Darwin" ]]; then
+    stat_date() { stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$1"; }
+    stat_size() { stat -f "%z" "$1"; }
+else
+    stat_date() { stat -c "%y" "$1" | cut -d'.' -f1; }
+    stat_size() { stat -c "%s" "$1"; }
+fi
+
+# Fonction pour générer un tableau Markdown
+generate_table() {
+    local items=("$@")
+    printf "| %-30s | %-4s | %-10s | %-16s |\n" "File Name" "Type" "Size" "Last Modified"
+    printf "|-%-30s-|-%-4s-|-%-10s-|-%-16s-|\n" "$(printf '%.0s-' {1..30})" "$(printf '%.0s-' {1..4})" "$(printf '%.0s-' {1..10})" "$(printf '%.0s-' {1..16})"
+    for f in "${items[@]}"; do
+        IFS='|' read -r name type size date <<< "$f"
+        printf "| %-30s | %-4s | %-10s | %-16s |\n" "$name" "$type" "$size" "$date"
+    done
+}
+
+# Fonction principale pour générer README dans un dossier
+generate_readme() {
+    local DIR="$1"
+    local OUTPUT_FILE="$DIR/README.md"
+    [[ -f "$OUTPUT_FILE" ]] && rm "$OUTPUT_FILE"
+
+    local PROJECT_NAME=$(basename "$DIR")
+
+    # --- Fichiers visibles uniquement ---
+    local files=()
+    while IFS= read -r file; do
+        name=$(basename "$file")
+        type="f"
+        size="$(stat_size "$file") bytes"
+        date=$(stat_date "$file")
+        files+=("$name|$type|$size|$date")
+    done < <(find "$DIR" -maxdepth 1 -type f ! -iname "readme.md" ! -name ".*" | sort)
+
+    # --- Sous-dossiers visibles uniquement ---
+    local subdirs=()
+    while IFS= read -r dir; do
+        name=$(basename "$dir")
+        type="d"
+        size="-"
+        date=$(stat_date "$dir")
+        subdirs+=("$name|$type|$size|$date")
+    done < <(find "$DIR" -maxdepth 1 -type d ! -path "$DIR" ! -name ".*" | sort)
+
+    # --- Écriture README.md ---
+    {
+        echo "# $PROJECT_NAME"
+        echo
+        echo "## Files"
+        echo
+        generate_table "${files[@]}"
+        if [[ ${#subdirs[@]} -gt 0 ]]; then
+            echo
+            echo "## Subdirectories"
+            echo
+            generate_table "${subdirs[@]}"
+        fi
+    } > "$OUTPUT_FILE"
+
+    echo "✅ README.md generated in '$DIR'"
+
+    # --- Récursion dans les sous-dossiers visibles ---
+    for dir in "${subdirs[@]}"; do
+        IFS='|' read -r sub_name _ _ _ <<< "$dir"
+        generate_readme "$DIR/$sub_name"
+    done
+}
+
+# Lancer la génération depuis le dossier courant
+generate_readme "$(pwd)"

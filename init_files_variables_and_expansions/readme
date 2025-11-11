@@ -1,6 +1,0 @@
-#!/bin/bash
-rm README.md
-echo -n "# " >> README.md
-pwd | rev | cut -d / -f 1 | rev >> README.md
-echo "" >> README.md
-ls -l |  grep -v README.md | grep -v readme | grep -v total |rev |cut -d " " -f 1| rev | sort -n >> README.md
