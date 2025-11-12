@@ -2,28 +2,28 @@
 
 ## Files
 
-| File Name                      | Type | Size       | Last Modified    |
-|--------------------------------|------|------------|------------------|
-| 0-hello_world                  | f    | 31 bytes   | 2025-11-11 08:22:22 |
-| 10-no_more_js                  | f    | 47 bytes   | 2025-11-11 08:22:22 |
-| 11-directories                 | f    | 42 bytes   | 2025-11-11 08:22:22 |
-| 12-newest_files                | f    | 29 bytes   | 2025-11-11 08:22:22 |
-| 13-unique                      | f    | 26 bytes   | 2025-11-11 08:22:22 |
-| 14-findthatword                | f    | 35 bytes   | 2025-11-11 08:22:22 |
-| 15-countthatword               | f    | 37 bytes   | 2025-11-11 08:22:22 |
-| 16-whatsnext                   | f    | 41 bytes   | 2025-11-11 08:22:22 |
-| 17-hidethisword                | f    | 38 bytes   | 2025-11-11 08:22:22 |
-| 18-letteronly                  | f    | 49 bytes   | 2025-11-11 08:22:22 |
-| 19-AZ                          | f    | 20 bytes   | 2025-11-11 08:22:22 |
-| 1-confused_smiley              | f    | 27 bytes   | 2025-11-11 08:22:22 |
-| 20-hiago                       | f    | 20 bytes   | 2025-11-11 08:22:22 |
-| 21-reverse                     | f    | 15 bytes   | 2025-11-11 08:22:22 |
-| 22-users_and_homes             | f    | 52 bytes   | 2025-11-11 08:22:22 |
-| 2-hellofile                    | f    | 27 bytes   | 2025-11-11 08:22:22 |
-| 3-twofiles                     | f    | 38 bytes   | 2025-11-11 08:22:22 |
-| 4-lastlines                    | f    | 28 bytes   | 2025-11-11 08:22:22 |
-| 5-firstlines                   | f    | 28 bytes   | 2025-11-11 08:22:22 |
-| 6-third_line                   | f    | 36 bytes   | 2025-11-11 08:22:22 |
-| 7-file                         | f    | 83 bytes   | 2025-11-11 08:22:22 |
-| 8-cwd_state                    | f    | 35 bytes   | 2025-11-11 08:22:22 |
-| 9-duplicate_last_line          | f    | 34 bytes   | 2025-11-11 08:22:22 |
+| Icon | Name                           | Type       | Size       |
+|----|--------------------------------|------------|------------|
+| 📄 | [0-hello_world](0-hello_world) | File | 31 bytes |
+| 📄 | [1-confused_smiley](1-confused_smiley) | File | 27 bytes |
+| 📄 | [2-hellofile](2-hellofile) | File | 27 bytes |
+| 📄 | [3-twofiles](3-twofiles) | File | 38 bytes |
+| 📄 | [4-lastlines](4-lastlines) | File | 28 bytes |
+| 📄 | [5-firstlines](5-firstlines) | File | 28 bytes |
+| 📄 | [6-third_line](6-third_line) | File | 36 bytes |
+| 📄 | [7-file](7-file) | File | 83 bytes |
+| 📄 | [8-cwd_state](8-cwd_state) | File | 35 bytes |
+| 📄 | [9-duplicate_last_line](9-duplicate_last_line) | File | 34 bytes |
+| 📄 | [10-no_more_js](10-no_more_js) | File | 47 bytes |
+| 📄 | [11-directories](11-directories) | File | 42 bytes |
+| 📄 | [12-newest_files](12-newest_files) | File | 29 bytes |
+| 📄 | [13-unique](13-unique) | File | 26 bytes |
+| 📄 | [14-findthatword](14-findthatword) | File | 35 bytes |
+| 📄 | [15-countthatword](15-countthatword) | File | 37 bytes |
+| 📄 | [16-whatsnext](16-whatsnext) | File | 41 bytes |
+| 📄 | [17-hidethisword](17-hidethisword) | File | 38 bytes |
+| 📄 | [18-letteronly](18-letteronly) | File | 49 bytes |
+| 📄 | [19-AZ](19-AZ) | File | 20 bytes |
+| 📄 | [20-hiago](20-hiago) | File | 20 bytes |
+| 📄 | [21-reverse](21-reverse) | File | 15 bytes |
+| 📄 | [22-users_and_homes](22-users_and_homes) | File | 52 bytes |

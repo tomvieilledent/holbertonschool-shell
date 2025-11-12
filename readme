@@ -1,23 +1,46 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Fonction pour obtenir la date selon OS
+# Fonction pour obtenir la taille du fichier selon OS
 if [[ "$(uname)" == "Darwin" ]]; then
-    stat_date() { stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$1"; }
     stat_size() { stat -f "%z" "$1"; }
 else
-    stat_date() { stat -c "%y" "$1" | cut -d'.' -f1; }
     stat_size() { stat -c "%s" "$1"; }
 fi
+
+# Fonction pour détecter le type de fichier et retourner une icône
+file_icon() {
+    local file="$1"
+    if [[ -d "$file" ]]; then
+        echo "📁"
+    else
+        ext="${file##*.}"
+        case "$ext" in
+            md|txt|rst) echo "📄" ;;
+            sh|py|js|rb|pl) echo "⚙️" ;;
+            jpg|jpeg|png|gif|svg) echo "🖼️" ;;
+            pdf) echo "📕" ;;
+            *) echo "📄" ;; # fichier générique
+        esac
+    fi
+}
 
 # Fonction pour générer un tableau Markdown
 generate_table() {
     local items=("$@")
-    printf "| %-30s | %-4s | %-10s | %-16s |\n" "File Name" "Type" "Size" "Last Modified"
-    printf "|-%-30s-|-%-4s-|-%-10s-|-%-16s-|\n" "$(printf '%.0s-' {1..30})" "$(printf '%.0s-' {1..4})" "$(printf '%.0s-' {1..10})" "$(printf '%.0s-' {1..16})"
+    printf "| %-2s | %-30s | %-10s | %-10s |\n" "Icon" "Name" "Type" "Size"
+    printf "|-%-2s-|-%-30s-|-%-10s-|-%-10s-|\n" "$(printf '%.0s-' {1..2})" "$(printf '%.0s-' {1..30})" "$(printf '%.0s-' {1..10})" "$(printf '%.0s-' {1..10})"
     for f in "${items[@]}"; do
-        IFS='|' read -r name type size date <<< "$f"
-        printf "| %-30s | %-4s | %-10s | %-16s |\n" "$name" "$type" "$size" "$date"
+        IFS='|' read -r icon name type size <<< "$f"
+
+        # Pour les dossiers, pointer vers README.md
+        if [[ "$type" == "Directory" ]]; then
+            link="$name/README.md"
+        else
+            link="$name"
+        fi
+
+        printf "| %s | [%s](%s) | %s | %s |\n" "$icon" "$name" "$link" "$type" "$size"
     done
 }
 
@@ -33,29 +56,28 @@ generate_readme() {
     local files=()
     while IFS= read -r file; do
         name=$(basename "$file")
-        type="f"
+        icon=$(file_icon "$file")
         size="$(stat_size "$file") bytes"
-        date=$(stat_date "$file")
-        files+=("$name|$type|$size|$date")
-    done < <(find "$DIR" -maxdepth 1 -type f ! -iname "readme.md" ! -name ".*" | sort)
+        files+=("$icon|$name|File|$size")
+    done < <(find "$DIR" -maxdepth 1 -type f ! -iname "readme.md" ! -name ".*" | sort -V)
 
     # --- Sous-dossiers visibles uniquement ---
     local subdirs=()
     while IFS= read -r dir; do
         name=$(basename "$dir")
-        type="d"
-        size="-"
-        date=$(stat_date "$dir")
-        subdirs+=("$name|$type|$size|$date")
-    done < <(find "$DIR" -maxdepth 1 -type d ! -path "$DIR" ! -name ".*" | sort)
+        icon=$(file_icon "$dir")
+        subdirs+=("$icon|$name|Directory|-")
+    done < <(find "$DIR" -maxdepth 1 -type d ! -path "$DIR" ! -name ".*" | sort -V)
 
     # --- Écriture README.md ---
     {
         echo "# $PROJECT_NAME"
         echo
-        echo "## Files"
-        echo
-        generate_table "${files[@]}"
+        if [[ ${#files[@]} -gt 0 ]]; then
+            echo "## Files"
+            echo
+            generate_table "${files[@]}"
+        fi
         if [[ ${#subdirs[@]} -gt 0 ]]; then
             echo
             echo "## Subdirectories"
@@ -68,7 +90,7 @@ generate_readme() {
 
     # --- Récursion dans les sous-dossiers visibles ---
     for dir in "${subdirs[@]}"; do
-        IFS='|' read -r sub_name _ _ _ <<< "$dir"
+        IFS='|' read -r _ sub_name _ _ <<< "$dir"
         generate_readme "$DIR/$sub_name"
     done
 }

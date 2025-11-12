@@ -2,24 +2,24 @@
 
 ## Files
 
-| File Name                      | Type | Size       | Last Modified    |
-|--------------------------------|------|------------|------------------|
-| 0-current_working_directory    | f    | 16 bytes   | 2025-11-11 08:22:22 |
-| 10-back                        | f    | 16 bytes   | 2025-11-11 08:22:22 |
-| 11-lists                       | f    | 29 bytes   | 2025-11-11 08:22:22 |
-| 12-file_type                   | f    | 30 bytes   | 2025-11-11 08:22:22 |
-| 13-symbolic_link               | f    | 32 bytes   | 2025-11-11 08:22:22 |
-| 14-copy_html                   | f    | 27 bytes   | 2025-11-11 08:22:22 |
-| 15-lets_move                   | f    | 29 bytes   | 2025-11-11 08:22:22 |
-| 16-clean_emacs                 | f    | 17 bytes   | 2025-11-11 08:22:22 |
-| 17-tree                        | f    | 58 bytes   | 2025-11-11 08:22:22 |
-| 1-listit                       | f    | 14 bytes   | 2025-11-11 08:22:22 |
-| 2-bring_me_home                | f    | 15 bytes   | 2025-11-11 08:22:22 |
-| 3-listfiles                    | f    | 17 bytes   | 2025-11-11 08:22:22 |
-| 4-listmorefiles                | f    | 20 bytes   | 2025-11-11 08:22:22 |
-| 5-listfilesdigitonly           | f    | 19 bytes   | 2025-11-11 08:22:22 |
-| 6-firstdirectory               | f    | 41 bytes   | 2025-11-11 08:22:22 |
-| 7-movethatfile                 | f    | 49 bytes   | 2025-11-11 08:22:22 |
-| 8-firstdelete                  | f    | 44 bytes   | 2025-11-11 08:22:22 |
-| 9-firstdirdeletion             | f    | 42 bytes   | 2025-11-11 08:22:22 |
-| 9-my_first_directory           | f    | 44 bytes   | 2025-11-11 08:22:22 |
+| Icon | Name                           | Type       | Size       |
+|----|--------------------------------|------------|------------|
+| 📄 | [0-current_working_directory](0-current_working_directory) | File | 16 bytes |
+| 📄 | [1-listit](1-listit) | File | 14 bytes |
+| 📄 | [2-bring_me_home](2-bring_me_home) | File | 15 bytes |
+| 📄 | [3-listfiles](3-listfiles) | File | 17 bytes |
+| 📄 | [4-listmorefiles](4-listmorefiles) | File | 20 bytes |
+| 📄 | [5-listfilesdigitonly](5-listfilesdigitonly) | File | 19 bytes |
+| 📄 | [6-firstdirectory](6-firstdirectory) | File | 41 bytes |
+| 📄 | [7-movethatfile](7-movethatfile) | File | 49 bytes |
+| 📄 | [8-firstdelete](8-firstdelete) | File | 44 bytes |
+| 📄 | [9-firstdirdeletion](9-firstdirdeletion) | File | 42 bytes |
+| 📄 | [9-my_first_directory](9-my_first_directory) | File | 44 bytes |
+| 📄 | [10-back](10-back) | File | 16 bytes |
+| 📄 | [11-lists](11-lists) | File | 29 bytes |
+| 📄 | [12-file_type](12-file_type) | File | 30 bytes |
+| 📄 | [13-symbolic_link](13-symbolic_link) | File | 32 bytes |
+| 📄 | [14-copy_html](14-copy_html) | File | 27 bytes |
+| 📄 | [15-lets_move](15-lets_move) | File | 29 bytes |
+| 📄 | [16-clean_emacs](16-clean_emacs) | File | 17 bytes |
+| 📄 | [17-tree](17-tree) | File | 58 bytes |
